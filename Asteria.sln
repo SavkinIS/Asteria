@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asteria", "Asteria.csproj", "{C23C8DD7-9BEF-440C-A360-00470F544EB8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C23C8DD7-9BEF-440C-A360-00470F544EB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C23C8DD7-9BEF-440C-A360-00470F544EB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C23C8DD7-9BEF-440C-A360-00470F544EB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C23C8DD7-9BEF-440C-A360-00470F544EB8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DDB9EB0E-14CA-4BE9-9C32-E70EF71905D0}
+	EndGlobalSection
+EndGlobal

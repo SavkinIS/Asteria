@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/calendar.css">
+    <link rel="stylesheet" href="~/css/form.css">
+    <script type="text/javascript" src="~/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="~/javascript.js"></script>
+    <link rel="Stylesheet" type="text/css" href="~/css/smoothDivScroll.css" />
+    <link rel="stylesheet" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <script src="~/js/react.development.js"></script>
+    <script src="~/js/react-dom.development.js"></script>
+
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <header>
+        <h1>Салон красоты Астерия в Щёлково</h1>
+        <div id="nav_bar" class="div_flex main_content_block">
+            <div class="logo_div">
+                <img src="~/images/logo.jpg" alt="" class="logo" />
+            </div>
+
+            <h2 id="name_salon">Астерия</h2>
+            <div id="contacts_head">
+
+                <table>
+                    <tr>
+                        <td> <i class="fa fa-phone" aria-hidden="true"></i></td>
+                        <td><a href="tel:+7(926) 982-77-52">+7 (926) 982-77-52 </a></td>
+                    </tr>
+                    <tr>
+                        <td> <i class="fa fa-envelope" aria-hidden="true"></i></td>
+                        <td><a href="mailto:mcw08@mail.ru">mcw08@mail.ru</a></td>
+                    </tr>
+                    <tr>
+                        <td>   <i class="fa fa-map-marker" aria-hidden="true"></i></td>
+                        <td> <a href="#"> Щёлково, улица Комарова, 1А</a></td>
+                    </tr>
+                </table>
+
+
+            </div>
+
+        </div>
+        <div class="main_content_block">
+            <nav id="main_menu">
+                <a href="~/">Главная</a>
+                <a href="~/Home/About/">Специалисты</a>
+                <a href="~/Home/Booking/">Записаться</a>
+                <a href="#">Цены</a>
+                <a href="#">Отзывы</a>
+                <a href="#">Наши работы</a>
+                <a href="#">Котнакты</a>
+            </nav>
+        </div>
+
+
+    </header>
+    @RenderBody()
+
+
+
+</body>
+</html>
