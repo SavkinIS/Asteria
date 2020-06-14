@@ -1,0 +1,32 @@
+﻿@using Asteria.Models
+
+@{
+    ViewData["Title"] = "Panel";
+}
+
+<h1>Panel</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+
+    </thead>
+    <tbody>
+        <table class="table table-striped">
+
+            @foreach (Record rec in Model.Value)
+            {
+            <tr>
+                <th>@rec.Id</th>
+                <th>@rec.ClientId</th>
+                <th>@rec.Date</th>
+                <th>@rec.SpecId</th>
+                <th>@rec.Time</th>
+                <th>@rec.TypeWork</th>
+            </tr>
+            }
+        </table>
+    </tbody>
+</table>

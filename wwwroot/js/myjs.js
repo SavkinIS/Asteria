@@ -5,6 +5,12 @@ $(document).ready(function () {
     let booking_date = new Date();
     let gender= "all";
     let typeWorck = "all";
+    let dateForAJAX = (booking_date.getFullYear()+"-"+(booking_date.getMonth()+1)+"-"+booking_date.getDate());
+    var tx= $('.today_num').text();
+    var dataL ;
+
+    let specNAme;
+    booking_day = tx;
 
     $(".conteiner").hover(function(){
  
@@ -33,6 +39,8 @@ $(document).ready(function () {
         $(this).css("background-color", "#bca858");
     });
 
+   
+
     //изменене света календаря
     
     $(".calendar__number").click(function(){
@@ -41,11 +49,19 @@ $(document).ready(function () {
         booking_date.setDate($(this).text());
         booking_day = $(this).text();
         booking_month =new Date().getMonth()+today +1;
+        let month=new Array("01","02","03","04","05","06",
+        "07","08","09","10","11","12")
+        if(booking_day.length!=2){
+            booking_day = '0'+booking_day;
+        }
+        booking_date.setDate(booking_day);
+        dateForAJAX =(booking_date.getFullYear()+"-"+month[booking_date.getMonth()]+"-"+booking_day);
+        $('input[name=date]').val(dateForAJAX);
         
         
     });
     
-    var tx= $('.today_num').text();
+    
     var elements = $(".calendar__number").filter(function() {
     return $(this).text() === tx;
     }).css('border', '1px solid red');
@@ -96,61 +112,36 @@ $(document).ready(function () {
     $(".bt_type_work").click(function(){
         typeWorck =$(this).attr( "title" );
         console.log(typeWorck);
+        $('select[name=wk_select]').val(typeWorck);
     });
-
-/*
-   let month=new Array("01","02","03","04","05","06",
-                    "07","08","09","10","11","12")
-    let t = new Date();
-    let data =(t.getFullYear()+"-"+month[t.getMonth()]+"-"+t.getDate());
-    $('input[name=date]').val(data);*/
-   // $("#data_input").val(data);
-
-
-    //открытие расписания 
-   /* $(".one_spec").click(function(){
-        let timeT = $(this).parent();
-        for (let index = 9; index < 20; index++) {
-           for (let i = 00; i < 60; i+15) {
-            $(this).parent().children("timetable").append(`
-            <div class = "time_of_day"><p>${index}:${i}</p></div> 
-            `);
-           }
-            
-        }
-    });*/
-
 
 
     $(".one_spec").click(function(){
         $("#one_form").remove();
         $(".time_of_day").remove();
         let timeT = $(this).parent();
-        for (let index = 9; index < 20; index++) {
-           for (let i = 00; i < 60; i++) {
-             let z = "";
-             
-             if(i=== 0){
-               z="0";
-               
-             }
-             
-            $(this).parent().children(".free_time").append(`
-            <div class = "time_of_day"><p>${index}:${i+z}</p></div> 
-            
-            `);
-           /* $('.time_of_day').text(function(){
-               if($(this).text() === "10:30"){
-               $(this).hide();
-               
-             }});*/
-                                    
-             i = i+14;
-             
-             ; }}
+        var thP = $(this).parent();
         
-        $(this).parent().children(".timetable").append(`
-        <form class="contact_form" action="https://echo.htmlacademy.ru/"  method="#" id = "one_form" name="contact_form">
+        //Home/AddClient/spec_name
+        
+         specNAme = $(this).children(".spec_desc").children(".spec_name").text();
+       
+      
+             
+             $.when(load()).then(function(){
+                newFunction();
+             });
+            let x = dataL.length;
+            for(let i = 0; i < x; i++) {
+                $(this).parent().children(".free_time").append(`
+                            <div class = "time_of_day"><p>${dataL[i]}</p></div>  
+                            `);
+            }
+            
+                    
+
+             $(this).parent().children(".timetable").append(`
+        <form class="contact_form" action="/Home/AddClient/"  method="post" id = "one_form" name="contact_form">
                     <ul>
                     
                         <li>
@@ -158,19 +149,20 @@ $(document).ready(function () {
                              <span class="required_notification">* Не отмеченные поля</span>
                         </li>
                         <li>
-                        <label for="spec">Имя:</label>
-                        <input type="text"  placeholder="Алла"  name = "spec" required />
+                        <label for="spec">Имя Специалиста:</label>
+                        <input type="text"  placeholder="Алла"  name = "spec" required  readonly/>
                     </li>
                         <li>
-                            <label for="name">Имя:</label>
+                            <label for="name">Ваше Имя:</label>
                             <input type="text"  placeholder="Алла"  name = "name" required />
                         </li>
                         <li>
-                            <label for="phone">Phone:</label>
-                            <input type="tel" name="phone"                                placeholder="+7 926 982-77-52"  
-                                   pattern="+79[0-9]{2}[0-9]{3}[0-9]{2}[0-9]{2}"
+                            <label for="phone">Ваш номер телефона:</label>
+                            <input type="tel" name="phone"   
+                              placeholder="7 926 982-77-52" maxlength="11"
+                                   pattern="79[0-9]{2}[0-9]{3}[0-9]{2}[0-9]{2}"
                        required>
-                            <span class="form_hint">+7 926 982-77-52"</span>
+                            <span class="form_hint">7 926 982-77-52</span>
                         </li>
                         <li>
                            <label for="data">Дата приема:</label>
@@ -186,7 +178,7 @@ $(document).ready(function () {
                                 <select id="type_wk_select" name="wk_select">
                                     <option value="face" >Макияж</option>
                                     <option value="haircut">Стрижка</option>
-                                    <option value="painHair" >Окрашивание</option>
+                                    <option value="painhair" >Окрашивание</option>
                                     <option value="manicure">Маникюр</option>
                                   <option value="pedicure"  >Педикюр</option>
                                   <option value="massage">Массаж</option>
@@ -209,33 +201,76 @@ $(document).ready(function () {
         `);
       
 
-    let specName = $(this).children(".spec_desc").children(".spec_name").text();
-    
-    $('input[name=spec]').val(specName);
-    $('input[name=spec]').attr('disabled', 'disabled');
+                         let specName = $(this).children(".spec_desc").children(".spec_name").text();
 
-    let month=new Array("01","02","03","04","05","06",
-    "07","08","09","10","11","12")
-    let t = new Date();
-    let data =(booking_date.getFullYear()+"-"+month[booking_date.getMonth()]+"-"+booking_date.getDate());
-
-    $('input[name=date]').val(data);
-    $('select[name=wk_select]').val(typeWorck);
-    $("#type_wk_select option[value= typeWorck ]").attr("selected", "selected");
-
-
-    $(".time_of_day").click(function(){
-        $(".time_of_day").removeClass("reserved");
-        $(this).addClass("reserved");
-        let tm = $(this).text();
-        $("#time_input").val(tm);
+      
+                        $('input[name=spec]').val(specName);
+  
+                         let month=new Array("01","02","03","04","05","06",
+                         "07","08","09","10","11","12")
+                         if(booking_day.length!=2){
+                          booking_day = '0'+booking_day;
+                          }
+                        let data =(booking_date.getFullYear()+"-"+month[booking_date.getMonth()]+"-"+booking_day);
         
-    });
+
+                            $('input[name=date]').val(data);
     
+                        $('select[name=wk_select]').val(typeWorck);
+                         $("#type_wk_select option[value= typeWorck ]").attr("selected", "selected");
+
+
+                         $(".time_of_day").click(function(){
+                         $(".time_of_day").removeClass("reserved");
+                        $(this).addClass("reserved");
+                        let tm = $(this).text();
+                        $("#time_input").val(tm);
+                     });
+                
+                
+
+          /* var responce = $.ajax({
+                url: '/Home/GetSheets',
+                data: {
+                    date: dateForAJAX,
+                    spec :specNAme,
+                 },
+            });*/
+    
+            
+
+        
+        
+        
+
+
+
+        //Получение расписания
        
     });
 
    
 
+
+    function load() {
+        $.ajax({
+            url: "/Home/GetSheets",
+            async: false,
+            data: {
+               date: dateForAJAX,
+               spec :specNAme,
+            },
+            success: function (rezult) {
+                dataL = rezult;
+                
+                
+            }});
+        console.log("Loaded");
+    }
+
 });
+
+function newFunction() {
+    
+}
 

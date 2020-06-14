@@ -1,0 +1,184 @@
+﻿@using Asteria.Models
+@model Asteria.Models.DTO.RecordsDTO
+
+@{
+    Layout = null;
+}
+
+@{
+    ViewData["Title"] = "Panel";
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/adminStyle.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+<body>
+    <section class="continer">
+        <header class="container">
+
+            <div class="row">
+                <div class="col">
+                    <img id="logo" class="rounded float-left" src="~/images/logo.jpg" alt="">
+                </div>
+
+                <div class="col">
+                    <form method="post" asp-controller="Admin" asp-action="Logout" id="logout" asp-antiforgery="true">
+                        @*<input type="submit" value="Выход"/>*@
+                        <a href="#" id="door" class="btn btn-dark float-right" onclick="document.getElementById('logout').submit()">Выход</a>
+                    </form>
+                </div>
+            </div>
+
+
+        </header>
+
+
+
+
+        <section id="mainConteiner">
+            <nav id="menu">
+
+                <button type="button" class="btn btn-info" id="sheets-bt">График Работы</button>
+                <button type="button" class="btn btn-info">Специалисты</button>
+                <button type="button" class="btn btn-info">Клиенты</button>
+
+
+            </nav>
+
+            <section id="menu2nd">
+
+
+                <form class="form-row">
+                    <div class="form-group col-md-3">
+
+                        <input class="form-control form-control-m" name="date-main" type="date">
+                    </div>
+                    <div class="form-group col-md-5 justify-content-md-center">
+                        <div class="btn-group justify-content-xl-center">
+                            <button type="button" id="bt" class="btn btn-primary">Выберите специалиста</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" onclick="document.getElementById('bt').textContent = this.textContent" href="#">Алла</a>
+                                <a class="dropdown-item" onclick="document.getElementById('bt').textContent = this.textContent" href="#">Инга</a>
+                                <a class="dropdown-item" onclick="document.getElementById('bt').textContent = this.textContent" href="#">Мария</a>
+                                <a class="dropdown-item" onclick="document.getElementById('bt').textContent = this.textContent" href="#">Все</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3 ml-1">
+                        <button type="button" class="btn btn-success" id="sheets_take">Просмотр</button>
+                    </div>
+                    <div class="col-md-3 float-lg-right">
+                        <button type="button" class="btn btn-info" id="change">Изменить</button>
+                    </div>
+                </form>
+
+
+
+                @*форма изменения*@
+                <form class="form" id="form-chg" method="post" asp-controller="Admin" asp-action="ChangeRecord" asp-antiforgery="true">
+
+
+
+                    <table class="table table-hover my-3" id="table-chg">
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Специалист</th>
+                                <th scope="col">Дата</th>
+                                <th scope="col">Время</th>
+                                <th scope="col">Имя клиента</th>
+                                <th scope="col">Вид услуги</th>
+                                <th scope="col">Цена</th>
+                                <th scope="col"></th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tb-chg">
+
+                            <tr>
+                                <th scope="col">
+                                    <input asp-for="Id" class="form-control form-control-sm" type="text" name="id" readonly placeholder="id">
+                                </th>
+                                <th scope="col">
+
+
+                                    <div class="form-group">
+
+                                        <select class="form-control" id="chgSpec" asp-for="SpecName">
+                                            <option value="Алла">Алла</option>
+                                            <option value="Инга">Инга</option>
+                                            <option value="Мария">Мария</option>
+
+                                        </select>
+                                    </div>
+
+                                </th>
+                                <th scope="col">
+
+                                    <input class="form-control form-control-sm" name="date" id="change-date" asp-for="Date" type="date">
+                                </th>
+                                <th scope="col">
+
+                                    <input class="form-control form-control-sm" name="time" id="change-time" asp-for="Time" type="time">
+                                </th>
+                                <th scope="col">
+
+                                    <input class="form-control form-control-sm" type="text" name="clientName" asp-for="ClientName" readonly placeholder="id">
+
+                                </th>
+                                <th scope="col">
+                                    <input class="form-control form-control-sm" type="text" name="typeWork" asp-for="TypeWork" placeholder="Стрижка">
+                                </th>
+                                <th scope="col">
+                                    <input class="form-control form-control-sm" type="text" name="price" asp-for="Price" placeholder="Цена">
+                                </th>
+
+                                <th scope="col">
+                                    <button type="submit" class="btn btn-success" id="save-chg">сохранить</button>
+                                </th>
+                                <th id="th-hide">
+                                    <input type="text" asp-for="Clientid" name="clientid" id="clientid" >
+                                    <input type="text" asp-for="SpecId" name="specId" id="specId" >
+                                </th>
+                                
+                              
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </form>
+
+
+                <p class="text-center text-danger " id="p-alert"> Вы не выбрали  <b>дату</b></b>. </p>
+
+                <table class="table table-hover my-3" id="table">
+                </table>
+            </section>
+
+
+
+
+        </section>
+    </section>
+
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="~/js/admin.js"></script>
+</body>
+</html>

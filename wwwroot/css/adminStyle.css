@@ -1,0 +1,58 @@
+html body{
+    background: whitesmoke;
+}
+body{
+    max-width: 1124px;
+	margin: auto;
+    display: contents;
+}
+
+
+.conteiner{
+    
+		max-width: 1124px;
+		margin: auto;
+}
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10px;
+
+}
+    #logo{
+    width: 80px;
+    height: 80px;
+    } 
+    
+    #door{
+       margin: 34px 0 24px;
+    }
+#mainConteiner{
+    margin: 50px;
+}
+    #menu {
+        display: flex;
+        justify-content:space-between;
+        margin: auto;
+        max-width: 600px;
+        }
+
+    #menu2nd{
+        margin: auto;
+     max-width: 1200px;
+     margin-top: 40px;
+    }
+
+    #sheet{
+        margin: auto;
+        margin-top: 40px;
+    }
+
+        #sheet th{
+            max-width: 150px;
+                width: 150px;
+            height: 30px;
+            text-align: center;
+        }

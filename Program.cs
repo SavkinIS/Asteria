@@ -20,5 +20,7 @@ namespace Asteria
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
+
+        internal  static string token = "";
     }
 }
