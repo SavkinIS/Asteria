@@ -144,7 +144,7 @@ namespace Asteria.Interface
         /// </summary>
         /// <param name="namespec"></param>
         /// <returns></returns>
-        ActionResult<IEnumerable<Specialist>> GetSpecialists(string namespec)
+        ActionResult<IEnumerable<Specialist>> GetSpecialists(string namespec);
 
         /// <summary>
         /// Удаление клиента
